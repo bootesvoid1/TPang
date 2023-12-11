@@ -1,0 +1,53 @@
+<div class="w-full">
+  <h1>Task List</h1>
+  <table mat-table [dataSource]="tasks" class="mat-elevation-z8">
+    <!-- Task Text Column -->
+    <ng-container matColumnDef="text">
+      <th mat-header-cell *matHeaderCellDef> Task Text </th>
+      <td mat-cell *matCellDef="let task"> {{ task.text }} </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let task">
+
+        <button mat-icon-button (click)="editTask(task.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteTask(task.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Edit Mode Column -->
+    <ng-container matColumnDef="editMode" >
+      <th mat-header-cell *matHeaderCellDef> Edit Mode </th>
+      <td mat-cell *matCellDef="let task">
+        <div *ngIf="editingTaskId === task.id;">
+          <input matInput [(ngModel)]="task.text" />
+          <button mat-raised-button mat-button (click)="updateTask()">Update</button>
+        </div>
+        <ng-template >
+          <button mat-raised-button  mat-icon-button (click)="editTask(task.id)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-raised-button mat-icon-button (click)="deleteTask(task.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['text', 'actions', 'editMode']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['text', 'actions', 'editMode'];"></tr>
+  </table>
+
+  <div>
+    <mat-form-field>
+      <input matInput [(ngModel)]="newTask" placeholder="New Task" />
+    </mat-form-field>
+    <button mat-button (click)="addTask()">Add Task</button>
+  </div>
+</div>

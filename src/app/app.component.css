@@ -1,0 +1,40 @@
+
+body, html, app-root {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  max-width: none;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Style the header and give it some space */
+app-header {
+  margin-bottom: 20px;
+}
+
+/* Create a flex container for the main content area */
+main {
+  display: flex;
+  flex: 1;
+}
+
+/* Style the sidebar */
+app-sidebar {
+  width: 200px; /* Adjust the width as needed */
+}
+
+/* Style the main content area (router-outlet) */
+router-outlet {
+ margin:20px;
+  padding: 20px;
+
+}
+
+app-footer {
+  margin-top: auto; /* Push the footer to the bottom */
+}
